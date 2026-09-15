@@ -5,7 +5,7 @@ This module can be used by synapse as a storage provider, allowing it to fetch
 and store media in Amazon S3.
 
 Current TeleCrypt project facts and architecture decisions are maintained only in the canonical
-[`llms.txt`](https://telecrypt.io/llms.txt); this README documents this provider fork.
+[`llms.txt`](https://www.telecrypt.io/llms.txt); this README documents this provider fork.
 
 
 Usage
