@@ -13,7 +13,7 @@ setup(
     description="A storage provider which can fetch and store media in Amazon S3.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/TeleCrypt-io/synapse-s3-storage-provider",
+    url="https://github.com/TeleCrypt-io/fork-synapse-s3-storage-provider",
     license_expression="Apache-2.0",
     classifiers=[
         "Programming Language :: Python :: 3",
