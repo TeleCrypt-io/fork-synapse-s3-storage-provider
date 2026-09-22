@@ -19,6 +19,7 @@ import threading
 
 import boto3
 import botocore
+from boto3.s3.transfer import TransferConfig
 from botocore.config import Config
 
 from twisted.internet import defer, reactor
@@ -207,11 +208,16 @@ class S3StorageProviderBackend(StorageProvider):
 
 
 def _upload_file(s3_client, bucket, key, source_path):
-    """Upload the temporary file using boto3's standard managed transfer."""
+    """Upload the temporary file using a sequential managed transfer."""
 
     if not isinstance(source_path, str):
         raise ValueError("Synapse temporary media source path must be a string")
-    s3_client.upload_file(source_path, bucket, key)
+    s3_client.upload_file(
+        source_path,
+        bucket,
+        key,
+        Config=TransferConfig(use_threads=False),
+    )
 
 
 def _delete_object(s3_client, bucket, key):

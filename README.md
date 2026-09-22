@@ -41,7 +41,8 @@ described [here](https://boto3.readthedocs.io/en/latest/guide/configuration.html
 
 TeleCrypt's pinned Synapse fork passes the disposable upload source through
 `FileInfo.upload_path`. The provider passes that path to boto3's standard managed
-`upload_file` transfer. The optional
+`upload_file` transfer and serializes each file's multipart requests for the
+TeleCrypt S3-compatible endpoint. The optional
 storage-provider deletion hook deletes the exact canonical key and treats an
 already absent object as success.
 

@@ -37,7 +37,7 @@ from twisted.trial import unittest
 
 
 class S3ObjectOperationTestCase(unittest.TestCase):
-    def test_store_uses_boto_managed_transfer(self):
+    def test_store_uses_sequential_boto_managed_transfer(self):
         client = Mock()
 
         with TemporaryDirectory() as root:
@@ -47,9 +47,10 @@ class S3ObjectOperationTestCase(unittest.TestCase):
 
             _upload_file(client, "media-bucket", "media/local/abc", source_path)
 
-        client.upload_file.assert_called_once_with(
-            source_path, "media-bucket", "media/local/abc"
-        )
+        client.upload_file.assert_called_once()
+        args = client.upload_file.call_args
+        self.assertEqual(args.args, (source_path, "media-bucket", "media/local/abc"))
+        self.assertFalse(args.kwargs["Config"].use_threads)
 
     def test_delete_uses_the_exact_key(self):
         client = Mock()
